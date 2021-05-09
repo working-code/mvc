@@ -1,0 +1,17 @@
+<?php
+include_once 'menu.phtml';
+/** @var \App\Model\User $user */
+$user = $this->user;
+if ($user): ?>
+    <b>Ваш id:</b> <?= $user->getId();?> <br />
+    <b>Имя:</b> <?= $user->getName();?> <br />
+    <b>email:</b> <?= $user->getEmail();?> <br />
+    <b>Дата регистрации:</b> <?= $user->getDateRegistration();?> <br />
+
+
+<form action="/user/logout">
+    <input type="submit" value="Выйти">
+</form>
+<?php else: ?>
+Зарегистрируйтесь или войдите на сайт
+<?php endif;?>

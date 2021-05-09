@@ -1,0 +1,23 @@
+<?php include_once 'menu.phtml'; ?>
+    <h2>Блог</h2><br />
+
+    Добавить сообщение:<br />
+    <form action="/blog/messageAdd" enctype="multipart/form-data" method="post">
+        <textarea name="message" cols="70" rows="7"></textarea><br />
+        <input type="file" name="file" accept="image/jpeg,image/png"><br />
+        <input type="submit" value="Отправить"><br />
+    </form>
+
+<?php $messages = $this->messages;
+if ($messages) :
+    foreach ($messages as $message) { ?>
+        Сообщение #<?=$message['id'];?> от <b><?=$message['name'];?></b>      <?=$message['date'];?>   <a href="/blog/deleteMessage?id=<?=$message['id'];?>">Удалить</a> <br />
+        <?=$message['message'];?><br/>
+        <?php if($message['img']): ?>
+            <img src="<?= '/blog/getimg?img='. $message['img'];?>">
+        <?php endif;?>
+        <br/><br/>
+        <?php
+    }
+endif;
+?>
