@@ -24,7 +24,7 @@ class Message extends MainModel
         }
     }
 
-    public function save()
+    public function save(): bool
     {
         $query = "INSERT INTO blog(`message`, `date`, `user_id`, `img`)
             VALUES(:message, :date, :user_id, :img)";
