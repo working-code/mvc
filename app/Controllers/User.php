@@ -41,7 +41,7 @@ class User extends MainController
             }
         }
 
-        return $this->view->render('userLogin.phtml');
+        return $this->view->render('userLogin');
     }
 
     public function logout()
@@ -99,15 +99,27 @@ class User extends MainController
         }
 
 
-        return $this->view->render('userRegister.phtml');
+        return $this->view->render('userRegister');
     }
 
     public function profile()
     {
-        $user = new UserModel();
+        if (!$this->session->getUserId()) {
+            $this->redirect('/user/login');
+        }
+        $user = (new UserModel())->getById($this->session->getUserId() ?? 0);
+        $data = [];
+        if ($user) {
+            $data = [
+                'id' => $user->getId(),
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'date_register' => $user->getDateRegistration()
+            ];
+        }
         return $this->view->render(
-            'userProfile.phtml',
-            ['user' => $user->getById($this->session->getUserId() ?? 0)]
+            'userProfile',
+            ['user' => $data]
         );
     }
 

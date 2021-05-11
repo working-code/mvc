@@ -1,0 +1,20 @@
+{{ include ('menu.phtml') }}
+<h2>Блог</h2><br />
+
+Добавить сообщение:<br />
+<form action="/blog/messageAdd" enctype="multipart/form-data" method="post">
+    <textarea name="message" cols="70" rows="7"></textarea><br />
+    <input type="file" name="file" accept="image/jpeg,image/png"><br />
+    <input type="submit" value="Отправить"><br />
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        Сообщение #{{ message.id}}    от <b>{{ message.name}}</b>        {{ message.date}}<br />
+        {{ message.message}}<br/>
+        {% if message.img %}
+            <img src="/blog/getimg?img={{message.img}}">
+        {% endif %}
+        <br/><br/>
+    {% endfor %}
+{% endif %}

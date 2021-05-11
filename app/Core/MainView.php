@@ -15,8 +15,22 @@ class MainView
     public function render(string $pathTemplate, $data = [])
     {
         $this->data = array_merge($this->data, $data);
+        $data = $this->getData();
+
+        if (RENDER_TYPE === 2) {
+            $loader = new \Twig\Loader\FilesystemLoader($this->pathTemplate . DIRECTORY_SEPARATOR);
+            if (RENDER_TWIG_CACHE) {
+                $twig = new \Twig\Environment($loader, [
+                    'cache' => $this->pathTemplate . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR
+                ]);
+            } else {
+                $twig = new \Twig\Environment($loader);
+            }
+            return $twig->render($pathTemplate . '.twig', $data);
+        }
+
         ob_start();
-        require_once $this->pathTemplate . DIRECTORY_SEPARATOR . $pathTemplate;
+        require_once $this->pathTemplate . DIRECTORY_SEPARATOR . $pathTemplate . '.phtml';
         return ob_get_clean();
     }
 
@@ -28,5 +42,10 @@ class MainView
     public function __get($varName)
     {
         return $this->data[$varName] ?? null;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
     }
 }

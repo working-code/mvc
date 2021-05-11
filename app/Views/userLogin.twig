@@ -1,0 +1,11 @@
+{{ include ('menu.phtml') }}
+
+<form action="/user/login" method="post">
+    <b>Войти на сайт:</b> <br />
+    <font color="red">
+        {{errorMessage}}<br />
+    </font>
+    Ввведите email: <input type="text" name="email" placeholder="email"><br />
+    Введите пароль: <input type="password" name="password1" placeholder="пароль"><br />
+    <input type="submit" value="Войти"><br />
+</form>

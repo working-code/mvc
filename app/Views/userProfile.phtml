@@ -1,17 +1,12 @@
 <?php
 include_once 'menu.phtml';
-/** @var \App\Model\User $user */
-$user = $this->user;
-if ($user): ?>
-    <b>Ваш id:</b> <?= $user->getId();?> <br />
-    <b>Имя:</b> <?= $user->getName();?> <br />
-    <b>email:</b> <?= $user->getEmail();?> <br />
-    <b>Дата регистрации:</b> <?= $user->getDateRegistration();?> <br />
 
+if ($data): ?>
+    <b>Ваш id:</b> <?= $data['user']['id'];?> <br />
+    <b>Имя:</b> <?= $data['user']['name'];?> <br />
+    <b>email:</b> <?= $data['user']['email'];?> <br />
+    <b>Дата регистрации:</b> <?= $data['user']['date_register'];?> <br />
 
-<form action="/user/logout">
-    <input type="submit" value="Выйти">
-</form>
 <?php else: ?>
 Зарегистрируйтесь или войдите на сайт
 <?php endif;?>

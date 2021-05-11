@@ -1,0 +1,13 @@
+{{ include ('menu.phtml') }}
+
+<form action="/user/register" method="post">
+    <b>Регистрация пользователя:</b> <br />
+    <font color="red">
+        {{errorMessage}}<br />
+    </font>
+    Ввведите email: <input type="text" name="email" placeholder="email"><br />
+    Ввведите name: <input type="text" name="name" placeholder="Ваше имя"><br />
+    Введите пароль: <input type="password" name="password1" placeholder="пароль"><br />
+    Введите пароль еще раз: <input type="password" name="password2" placeholder="пароль"><br />
+    <input type="submit" value="Зарегистрироваться"><br />
+</form>

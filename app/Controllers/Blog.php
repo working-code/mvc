@@ -20,9 +20,9 @@ class Blog extends MainController
         $messages = $message->getMessages();
 
         $user = (new Admin())->getById($this->session->getUserId());
-        $pathTemplate = 'blogIndex.phtml';
+        $pathTemplate = 'blogIndex';
         if ($user->isAdmin()) {
-            $pathTemplate = 'blogAdminIndex.phtml';
+            $pathTemplate = 'blogAdminIndex';
         }
 
         return $this->view->render($pathTemplate, ['messages' => $messages]);
